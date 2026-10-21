@@ -1,0 +1,165 @@
+@import "@fontsource-variable/rubik";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Rubik Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  --color-ink: #15171c;
+  --color-muted: #5f6571;
+  --color-line: #e3e5e9;
+  --color-tile: #f3f4f6;
+  --color-accent: #c2410c;
+  --color-accent-bright: #ff8a3d;
+  --color-accent-ink: #9a3412;
+  --color-star: #f5a524;
+  --color-sale: #d4380d;
+  --color-sale-soft: #fff0e6;
+  --color-sale-ink: #9a3412;
+  --color-success: #15803d;
+  --color-danger: #c0362c;
+  --color-chart: #c2410c;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.5;
+  }
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.hero {
+  background:
+    radial-gradient(60rem 30rem at 85% 120%, rgb(255 138 61 / 0.55), transparent 60%),
+    radial-gradient(30rem 20rem at 100% 0%, rgb(255 138 61 / 0.25), transparent 70%),
+    var(--color-ink);
+}
+
+[dir="rtl"] .hero {
+  background:
+    radial-gradient(60rem 30rem at 15% 120%, rgb(255 138 61 / 0.55), transparent 60%),
+    radial-gradient(30rem 20rem at 0% 0%, rgb(255 138 61 / 0.25), transparent 70%),
+    var(--color-ink);
+}
+
+@layer components {
+  .skip-link {
+    @apply sr-only rounded-full bg-ink px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-50;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold tracking-tight sm:text-[1.75rem];
+  }
+
+  .button-primary {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-6 font-semibold text-white transition-opacity hover:opacity-85 disabled:opacity-50;
+  }
+
+  .button-secondary {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full border border-line bg-white px-5 font-semibold transition-colors hover:border-ink;
+  }
+
+  .button-accent {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent-bright px-7 font-semibold text-ink transition-[filter] hover:brightness-105;
+  }
+
+  .button-ghost-light {
+    @apply inline-flex h-12 items-center justify-center rounded-full border border-white/30 px-6 font-semibold text-white transition-colors hover:border-white;
+  }
+
+  .header-button {
+    @apply inline-flex h-10 min-w-10 items-center justify-center gap-1.5 rounded-full transition-colors hover:bg-tile;
+  }
+
+  .subnav-link {
+    @apply shrink-0 rounded-full px-3 py-1.5 whitespace-nowrap text-muted transition-colors hover:bg-tile hover:text-ink;
+  }
+
+  .subnav-active {
+    @apply bg-tile text-ink;
+  }
+
+  .side-link {
+    @apply block rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:bg-tile hover:text-ink aria-[current]:bg-ink aria-[current]:text-white;
+  }
+
+  .chip {
+    @apply inline-flex h-10 items-center rounded-full border border-line px-4 text-sm font-medium transition-colors hover:border-ink;
+  }
+
+  .tab {
+    @apply rounded-full px-4 py-1.5 text-sm font-medium text-muted transition-colors hover:text-ink;
+  }
+
+  .tab-active {
+    @apply bg-white text-ink shadow-sm;
+  }
+
+  .text-link {
+    @apply inline-flex items-center gap-1 font-semibold underline decoration-line decoration-2 underline-offset-4 hover:decoration-ink;
+  }
+
+  .field {
+    @apply h-11 rounded-xl border border-line bg-white px-3.5 text-[15px] placeholder:text-muted focus:border-ink focus:outline-none aria-invalid:border-danger;
+  }
+
+  .field-label {
+    @apply block text-sm font-medium;
+  }
+
+  .dialog {
+    @apply m-auto w-[min(40rem,calc(100%-1.5rem))] max-w-none rounded-2xl border-0 p-0 text-ink shadow-2xl;
+    max-height: calc(100dvh - 1.5rem);
+  }
+
+  .dialog::backdrop {
+    background: rgb(15 17 22 / 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast {
+    animation: toast-in 180ms ease-out;
+  }
+
+  .dialog[open] {
+    animation: toast-in 180ms ease-out;
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}
